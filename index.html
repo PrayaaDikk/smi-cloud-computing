@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloud Computing — Media Interaktif</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Barlow:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./src/styles/style.css">
+</head>
+</head>
+<body>
+
+<canvas id="grid-canvas"></canvas>
+
+<!-- AUDIO -->
+ <audio id="myAudio" src="./src/audio/background-music.mp3" loop></audio>
+
+<div class="audio-widget" id="audioWidget" onclick="toggleAudio()" title="Putar/Hentikan suara">
+  <div class="audio-dot off" id="audioDot"></div>
+  <div class="audio-waves paused" id="audioWaves">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <span class="audio-lbl" id="audioLbl">Putar</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">☁ CloudEdu</div>
+  <div class="nav-links">
+    <a href="#intro">Pengantar</a>
+    <a href="#layanan">Layanan</a>
+    <a href="#deployment">Deployment</a>
+    <a href="#stats">Fakta</a>
+    <a href="#quiz-section">Mulai Kuis →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+
+  <div class="hero-main">
+    <div class="hero-title-block">
+      <div class="hero-eyebrow">Modul Pembelajaran</div>
+      <h1>Cloud<br><em>Computing</em></h1>
+      <p class="hero-sub">
+        Pelajari teknologi komputasi awan yang mengubah cara dunia menyimpan, memproses, dan mengakses data — dari server, database, hingga kecerdasan buatan.
+      </p>
+      <div class="hero-cta">
+        <a href="#intro" class="btn-ink">Mulai Belajar →</a>
+        <a href="#quiz-section" class="btn-outline">Ikuti Kuis</a>
+      </div>
+    </div>
+    <div class="hero-sidebar">
+      <div class="hero-svg-wrap">
+        <!-- Animated network diagram -->
+        <svg width="280" height="300" viewBox="0 0 280 300" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+          <!-- Grid background -->
+          <defs>
+            <pattern id="smallgrid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(10,10,10,0.06)" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="280" height="300" fill="url(#smallgrid)"/>
+
+          <!-- Central cloud -->
+          <g transform="translate(95, 100)">
+            <ellipse cx="45" cy="32" rx="45" ry="22" fill="none" stroke="#0a0a0a" stroke-width="1.5">
+              <animate attributeName="stroke-dasharray" values="0 300;280 300" dur="2s" fill="freeze"/>
+            </ellipse>
+            <ellipse cx="22" cy="38" rx="22" ry="14" fill="none" stroke="#0a0a0a" stroke-width="1.2">
+              <animate attributeName="stroke-dasharray" values="0 200;150 200" dur="2.3s" fill="freeze"/>
+            </ellipse>
+            <ellipse cx="68" cy="38" rx="18" ry="12" fill="none" stroke="#0a0a0a" stroke-width="1.2">
+              <animate attributeName="stroke-dasharray" values="0 160;120 160" dur="2.1s" fill="freeze"/>
+            </ellipse>
+            <text x="45" y="36" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#3a3a3a" letter-spacing="1.5">CLOUD</text>
+          </g>
+
+          <!-- Connection lines with animated packets -->
+          <!-- Node: Server -->
+          <line x1="140" y1="132" x2="50" y2="220" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+          <circle r="4" fill="#0a0a0a" opacity="0">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 140,132 L 50,220"/>
+            <animate attributeName="opacity" values="0;0.7;0" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Node: Mobile -->
+          <line x1="140" y1="132" x2="230" y2="210" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+          <circle r="4" fill="#0a0a0a" opacity="0">
+            <animateMotion dur="2.5s" repeatCount="indefinite" path="M 140,132 L 230,210"/>
+            <animate attributeName="opacity" values="0;0.7;0" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Node: DB -->
+          <line x1="140" y1="132" x2="140" y2="240" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+          <circle r="4" fill="#0a0a0a" opacity="0">
+            <animateMotion dur="2s" repeatCount="indefinite" path="M 140,132 L 140,240"/>
+            <animate attributeName="opacity" values="0;0.7;0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Node: User -->
+          <line x1="140" y1="100" x2="50" y2="40" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4 4" opacity="0.25"/>
+          <circle r="4" fill="#0a0a0a" opacity="0">
+            <animateMotion dur="3.5s" repeatCount="indefinite" path="M 140,100 L 50,40"/>
+            <animate attributeName="opacity" values="0;0.7;0" dur="3.5s" repeatCount="indefinite"/>
+          </circle>
+          <line x1="140" y1="100" x2="230" y2="50" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4 4" opacity="0.25"/>
+          <circle r="4" fill="#0a0a0a" opacity="0">
+            <animateMotion dur="4s" repeatCount="indefinite" path="M 140,100 L 230,50"/>
+            <animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Nodes -->
+          <!-- Server -->
+          <rect x="26" y="214" width="48" height="30" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <text x="50" y="234" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#6b6b6b" letter-spacing="1">SERVER</text>
+          <!-- Mobile -->
+          <rect x="206" y="198" width="48" height="30" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <text x="230" y="218" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#6b6b6b" letter-spacing="1">MOBILE</text>
+          <!-- DB -->
+          <ellipse cx="140" cy="256" rx="28" ry="10" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <line x1="112" y1="256" x2="112" y2="270" stroke="#0a0a0a" stroke-width="1.2"/>
+          <line x1="168" y1="256" x2="168" y2="270" stroke="#0a0a0a" stroke-width="1.2"/>
+          <ellipse cx="140" cy="270" rx="28" ry="10" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <text x="140" y="262" text-anchor="middle" font-family="DM Mono" font-size="7" fill="#6b6b6b">DATABASE</text>
+          <!-- Top nodes -->
+          <rect x="22" y="16" width="56" height="28" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1" opacity="0.6"/>
+          <text x="50" y="35" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#a8a8a8" letter-spacing="0.5">PENGGUNA</text>
+          <rect x="202" y="24" width="56" height="28" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1" opacity="0.6"/>
+          <text x="230" y="43" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#a8a8a8" letter-spacing="0.5">PENGGUNA</text>
+
+          <!-- Floating data label -->
+          <g>
+            <rect x="94" y="160" width="92" height="20" rx="1" fill="#0a0a0a">
+              <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite"/>
+            </rect>
+            <text x="140" y="174" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#f5f4f0" letter-spacing="1.5">
+              <animate attributeName="opacity" values="0;1;1;0" dur="6s" repeatCount="indefinite"/>
+              DATA SYNC
+            </text>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-scroll">Gulir ke bawah</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- INTRO -->
+<section id="intro">
+  <img src="./src/img/Master Cloud Computing in 7 Simple Steps.jpg" class="img-pembelajaran" alt="Cloud Computing Steps">
+  <div class="section-header reveal">
+    <div class="section-num">01 — Pengantar</div>
+    <div>
+      <h2 class="section-title">Apa itu<br><em>Cloud Computing?</em></h2>
+      <p class="section-desc">Cloud computing adalah model pengiriman layanan komputasi melalui internet — server, penyimpanan, database, jaringan, perangkat lunak, analitik, dan kecerdasan buatan — tanpa perlu memiliki infrastruktur fisik.</p>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card reveal" style="transition-delay:0.05s">
+      <span class="card-num">01</span>
+      <h3>Akses dari Mana Saja</h3>
+      <p>Layanan cloud dapat diakses kapan saja melalui koneksi internet, tanpa bergantung pada perangkat atau lokasi fisik tertentu.</p>
+    </div>
+    <div class="card reveal" style="transition-delay:0.1s">
+      <span class="card-num">02</span>
+      <h3>Skalabilitas Tinggi</h3>
+      <p>Sumber daya komputasi ditingkatkan atau dikurangi secara otomatis sesuai kebutuhan, tanpa investasi infrastruktur baru.</p>
+    </div>
+    <div class="card reveal" style="transition-delay:0.15s">
+      <span class="card-num">03</span>
+      <h3>Efisiensi Biaya</h3>
+      <p>Model pay-as-you-go mengubah biaya modal besar menjadi biaya operasional fleksibel yang terhitung per jam atau per detik.</p>
+    </div>
+    <div class="card reveal" style="transition-delay:0.2s">
+      <span class="card-num">04</span>
+      <h3>Keandalan Tinggi</h3>
+      <p>Data di-backup di beberapa lokasi geografis berbeda, memastikan ketersediaan layanan (high availability) dan pemulihan bencana yang cepat.</p>
+    </div>
+    <div class="card reveal" style="transition-delay:0.25s">
+      <span class="card-num">05</span>
+      <h3>Kolaborasi Real-time</h3>
+      <p>Banyak pengguna bekerja pada dokumen atau proyek yang sama secara bersamaan dari lokasi berbeda di seluruh dunia.</p>
+    </div>
+    <div class="card reveal" style="transition-delay:0.3s">
+      <span class="card-num">06</span>
+      <h3>Pembaruan Otomatis</h3>
+      <p>Pembaruan perangkat lunak dan keamanan dilakukan otomatis oleh penyedia, mengurangi beban pengelolaan IT internal secara signifikan.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- SEJARAH -->
+<section>
+  <div class="section-header reveal">
+    <div class="section-num">02 — Sejarah</div>
+    <div>
+      <h2 class="section-title">Evolusi<br><em>Cloud Computing</em></h2>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-line"></div>
+    <div class="tl-item active-year reveal">
+      <div class="tl-year">1960-an</div>
+      <div class="tl-content">
+        <h4>Mainframe & Time-sharing</h4>
+        <p>Konsep berbagi sumber daya komputasi melalui terminal diperkenalkan oleh John McCarthy — cikal bakal gagasan cloud modern.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">1999</div>
+      <div class="tl-content">
+        <h4>SaaS Pertama — Salesforce</h4>
+        <p>Salesforce merevolusi pengiriman software melalui browser, meletakkan fondasi model SaaS yang kini dipakai jutaan perusahaan.</p>
+      </div>
+    </div>
+    <div class="tl-item active-year reveal">
+      <div class="tl-year">2006</div>
+      <div class="tl-content">
+        <h4>Amazon Web Services Lahir</h4>
+        <p>AWS meluncurkan S3 dan EC2, menandai era cloud publik modern. Istilah "cloud computing" mulai populer di kalangan industri teknologi global.</p>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2010-an</div>
+      <div class="tl-content">
+        <h4>Era Multicloud & Container</h4>
+        <p>Microsoft Azure dan Google Cloud hadir sebagai pesaing. Docker dan Kubernetes merevolusi cara deployment aplikasi berskala besar.</p>
+      </div>
+    </div>
+    <div class="tl-item active-year reveal">
+      <div class="tl-year">2020+</div>
+      <div class="tl-content">
+        <h4>Cloud + AI = Masa Depan</h4>
+        <p>Pandemi mempercepat adopsi cloud secara masif. Kini cloud menjadi fondasi AI generatif, edge computing, dan infrastruktur digital nasional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- LAYANAN MODEL -->
+<section id="layanan">
+  <div class="section-header reveal">
+    <div class="section-num">03 — Model Layanan</div>
+    <div>
+      <h2 class="section-title">Tiga Pilar<br><em>Cloud Computing</em></h2>
+      <p class="section-desc">Masing-masing model menawarkan tingkat kontrol, fleksibilitas, dan manajemen yang berbeda — dipilih sesuai kebutuhan teknis organisasi.</p>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('iaas', this)">IaaS</button>
+      <button class="tab-btn" onclick="switchTab('paas', this)">PaaS</button>
+      <button class="tab-btn" onclick="switchTab('saas', this)">SaaS</button>
+    </div>
+
+    <div id="iaas" class="tab-panel active">
+      <div class="tab-body">
+        <h3>Infrastructure as a Service</h3>
+        <p>IaaS menyediakan infrastruktur komputasi dasar — virtual machine, jaringan, dan penyimpanan — melalui internet. Pengguna memiliki kontrol penuh atas sistem operasi dan konfigurasi server.</p>
+        <p><strong>Cocok untuk:</strong> Tim IT yang membutuhkan fleksibilitas penuh dan sedang memigrasikan aplikasi legacy ke lingkungan cloud.</p>
+        <div class="tag-row">
+          <span class="tag">Amazon EC2</span>
+          <span class="tag">Google Compute</span>
+          <span class="tag">Azure VMs</span>
+          <span class="tag">DigitalOcean</span>
+        </div>
+      </div>
+      <div class="tab-visual">
+        <svg width="200" height="220" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <rect x="16" y="20" width="168" height="36" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+            <text x="100" y="43" text-anchor="middle" font-family="DM Mono" font-size="11" fill="#0a0a0a" letter-spacing="1">NETWORKING</text>
+            <rect x="16" y="68" width="168" height="36" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+            <text x="100" y="91" text-anchor="middle" font-family="DM Mono" font-size="11" fill="#0a0a0a" letter-spacing="1">STORAGE</text>
+            <rect x="16" y="116" width="168" height="36" rx="2" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.2"/>
+            <text x="100" y="139" text-anchor="middle" font-family="DM Mono" font-size="11" fill="#f5f4f0" letter-spacing="1">VIRTUAL MACHINES</text>
+            <rect x="16" y="164" width="168" height="36" rx="2" fill="rgba(10,10,10,0.05)" stroke="rgba(10,10,10,0.2)" stroke-width="1"/>
+            <text x="100" y="187" text-anchor="middle" font-family="DM Mono" font-size="10" fill="#a8a8a8" letter-spacing="0.5">PHYSICAL HARDWARE</text>
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="4s" repeatCount="indefinite"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div id="paas" class="tab-panel">
+      <div class="tab-body">
+        <h3>Platform as a Service</h3>
+        <p>PaaS menyediakan lingkungan pengembangan dan deployment yang lengkap. Developer fokus menulis kode tanpa mengkhawatirkan pengelolaan infrastruktur di bawahnya.</p>
+        <p><strong>Cocok untuk:</strong> Developer yang ingin membangun, menguji, dan mendeploy aplikasi dengan cepat tanpa pengelolaan server.</p>
+        <div class="tag-row">
+          <span class="tag">Heroku</span>
+          <span class="tag">Google App Engine</span>
+          <span class="tag">Azure App Service</span>
+          <span class="tag">Vercel</span>
+        </div>
+      </div>
+      <div class="tab-visual">
+        <svg width="200" height="220" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+          <rect x="16" y="20" width="168" height="36" rx="2" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.2"/>
+          <text x="100" y="43" text-anchor="middle" font-family="DM Mono" font-size="11" fill="#f5f4f0" letter-spacing="1">APPLICATION</text>
+          <rect x="16" y="68" width="168" height="36" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <text x="100" y="91" text-anchor="middle" font-family="DM Mono" font-size="10" fill="#0a0a0a" letter-spacing="0.5">RUNTIME / MIDDLEWARE</text>
+          <rect x="16" y="116" width="168" height="36" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1.2"/>
+          <text x="100" y="139" text-anchor="middle" font-family="DM Mono" font-size="11" fill="#0a0a0a" letter-spacing="1">DATABASE</text>
+          <rect x="16" y="164" width="168" height="36" rx="2" fill="rgba(10,10,10,0.04)" stroke="rgba(10,10,10,0.15)" stroke-width="1"/>
+          <text x="100" y="187" text-anchor="middle" font-family="DM Mono" font-size="10" fill="#a8a8a8" letter-spacing="0.5">INFRASTRUCTURE (managed)</text>
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="4.5s" repeatCount="indefinite"/>
+        </svg>
+      </div>
+    </div>
+
+    <div id="saas" class="tab-panel">
+      <div class="tab-body">
+        <h3>Software as a Service</h3>
+        <p>SaaS adalah model distribusi di mana penyedia mengelola seluruh infrastruktur dan aplikasi. Pengguna cukup mengakses melalui browser tanpa instalasi apapun.</p>
+        <p><strong>Cocok untuk:</strong> Pengguna akhir yang ingin langsung menggunakan aplikasi tanpa kerumitan teknis. Model paling umum untuk konsumen.</p>
+        <div class="tag-row">
+          <span class="tag">Google Workspace</span>
+          <span class="tag">Microsoft 365</span>
+          <span class="tag">Zoom</span>
+          <span class="tag">Dropbox</span>
+        </div>
+      </div>
+      <div class="tab-visual">
+        <svg width="200" height="220" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="90" r="60" fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="8 4"/>
+          <circle cx="100" cy="90" r="42" fill="none" stroke="#0a0a0a" stroke-width="1.2" opacity="0.4"/>
+          <text x="100" y="84" text-anchor="middle" font-family="DM Mono" font-size="9" fill="#3a3a3a" letter-spacing="1">FULL</text>
+          <text x="100" y="98" text-anchor="middle" font-family="DM Mono" font-size="9" fill="#3a3a3a" letter-spacing="1">SOFTWARE</text>
+          <!-- Devices -->
+          <rect x="16" y="175" width="40" height="28" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="36" y="193" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#6b6b6b">PC</text>
+          <rect x="80" y="175" width="40" height="28" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="100" y="193" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#6b6b6b">PHONE</text>
+          <rect x="144" y="175" width="40" height="28" rx="2" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="164" y="193" text-anchor="middle" font-family="DM Mono" font-size="8" fill="#6b6b6b">TABLET</text>
+          <line x1="100" y1="150" x2="36" y2="175" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4"/>
+          <line x1="100" y1="150" x2="100" y2="175" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4"/>
+          <line x1="100" y1="150" x2="164" y2="175" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4"/>
+          <animateTransform attributeName="transform" type="translate" values="0,0;0,-3;0,0" dur="5s" repeatCount="indefinite"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- DEPLOYMENT -->
+<section id="deployment">
+  <div class="section-header reveal">
+    <div class="section-num">04 — Model Deployment</div>
+    <div>
+      <h2 class="section-title">Cara Deploy<br><em>Cloud</em></h2>
+      <p class="section-desc">Empat model deployment cloud dipilih berdasarkan kebutuhan keamanan, biaya, dan skala organisasi.</p>
+    </div>
+  </div>
+  <div class="dep-grid reveal">
+    <div class="dep-card">
+      <div class="dep-type">Public</div>
+      <h3>Public Cloud</h3>
+      <p>Infrastruktur dimiliki dan dioperasikan oleh penyedia pihak ketiga. Sumber daya dibagi dengan banyak pelanggan. Contoh: AWS, Azure, GCP.</p>
+    </div>
+    <div class="dep-card">
+      <div class="dep-type">Private</div>
+      <h3>Private Cloud</h3>
+      <p>Infrastruktur cloud eksklusif untuk satu organisasi. Dapat di-host on-premise atau oleh penyedia pihak ketiga. Keamanan lebih tinggi, biaya lebih besar.</p>
+    </div>
+    <div class="dep-card">
+      <div class="dep-type">Hybrid</div>
+      <h3>Hybrid Cloud</h3>
+      <p>Menggabungkan public dan private cloud, memungkinkan data dan aplikasi bergerak di antara keduanya. Fleksibilitas tinggi dengan kendali atas data sensitif.</p>
+    </div>
+    <div class="dep-card">
+      <div class="dep-type">Multi</div>
+      <h3>Multi Cloud</h3>
+      <p>Strategi menggunakan layanan dari beberapa penyedia cloud berbeda. Menghindari vendor lock-in dan mengoptimalkan keunggulan setiap provider.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- STATS -->
+<div class="stats-wrapper" id="stats">
+  <div class="stats-band-inner">
+    <div class="stats-top">
+      <h2 class="stats-title">Cloud Computing<br>di Dunia</h2>
+      <div class="stats-label">05 — Fakta & Angka · 2024</div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num" id="stat1">0</div>
+        <div class="stat-desc">Miliar USD<br>nilai pasar cloud global</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat2">0%</div>
+        <div class="stat-desc">Fortune 500<br>menggunakan cloud</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat3">0%</div>
+        <div class="stat-desc">Pertumbuhan<br>adopsi cloud per tahun</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat4">0</div>
+        <div class="stat-desc">Data center AWS<br>di seluruh dunia</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- QUIZ -->
+<section id="quiz-section" style="max-width:840px;">
+  <div class="section-header reveal">
+    <div class="section-num">06 — Kuis Interaktif</div>
+    <div>
+      <h2 class="section-title">Uji<br><em>Pemahamanmu</em></h2>
+      <p class="section-desc">10 pertanyaan tentang Cloud Computing. Baca setiap pertanyaan dengan teliti dan pilih jawaban yang paling tepat.</p>
+    </div>
+  </div>
+
+  <div class="quiz-outer reveal">
+    <div class="quiz-topbar">
+      <span class="quiz-progress-label" id="qProgress">Pertanyaan 1 dari 10</span>
+      <span class="quiz-score-tag">Skor: <strong id="scoreDisplay">0</strong></span>
+    </div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill" style="width:0%"></div></div>
+
+    <div class="quiz-body">
+      <div id="quizGame">
+        <div class="quiz-qnum" id="qNum">SOAL 01</div>
+        <div class="quiz-question" id="qText">Memuat pertanyaan...</div>
+        <div class="options-grid" id="optionsGrid"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <button class="quiz-next-btn" id="nextBtn" onclick="nextQuestion()">Pertanyaan Berikutnya →</button>
+      </div>
+
+      <div class="quiz-result" id="quizResult">
+        <div class="result-ring">
+          <svg width="140" height="140" viewBox="0 0 140 140">
+            <circle class="ring-bg" cx="70" cy="70" r="60"/>
+            <circle class="ring-fill" id="ringFill" cx="70" cy="70" r="60"/>
+          </svg>
+          <div class="ring-text">
+            <span class="result-pct" id="resultPct">0%</span>
+          </div>
+        </div>
+        <h3 class="result-title" id="resultTitle">Selesai!</h3>
+        <p class="result-desc" id="resultDesc"></p>
+        <div class="result-stats">
+          <div class="rs-item">
+            <span class="rs-num" id="rsCorrect" style="color:var(--ink)">0</span>
+            <div class="rs-label">Benar</div>
+          </div>
+          <div class="rs-item">
+            <span class="rs-num" id="rsWrong" style="color:var(--mid)">0</span>
+            <div class="rs-label">Salah</div>
+          </div>
+          <div class="rs-item">
+            <span class="rs-num" id="rsScore" style="color:var(--ink)">0</span>
+            <div class="rs-label">Poin</div>
+          </div>
+        </div>
+        <button class="quiz-restart-btn" onclick="restartQuiz()">↺ Ulangi Kuis</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">☁ CloudEdu</div>
+  <div class="footer-copy">
+    <div>&copy; 2026 · Sistem Media Interaktif</div>
+    <div>Fadil Prayadika</div>
+  </div>
+</footer>
+
+<script src="./src/js/script.js"></script>
+</body>
+</html>
